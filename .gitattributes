@@ -1,0 +1,7 @@
+# Default EOF is LF in Godot
+* text eol=lf
+
+# Ignore binary files
+*.png binary
+*.jpg binary
+*.wav binary
