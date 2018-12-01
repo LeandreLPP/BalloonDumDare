@@ -149,16 +149,25 @@ func _integrate_forces(var s):
 	s.set_linear_velocity(lv)
 	
 func inflateBalloon():
-	#if inflatingBalloon:
-	#	return
+	if inflatingBalloon:
+		return
 	
 	inflatingBalloon = balloonPacked.instance()
 	inflatingBalloon.set_position(get_position())
+	
+	inflatingBalloon.connect("finish_inflating", self, "_on_Balloon_inflated", [ inflatingBalloon ], CONNECT_DEFERRED | CONNECT_ONESHOT);
+	inflatingBalloon.connect("finish_deflating", self, "_on_Balloon_deflated", [ inflatingBalloon ], CONNECT_DEFERRED | CONNECT_ONESHOT);
 	
 	var spring = inflatingBalloon.get_node("DampedSpringJoint2D")
 	
 	get_parent().add_child(inflatingBalloon)	
 	spring.set_node_a(get_path())
 	
-func _on_Balloon_inflated():
-	pass
+	inflatingBalloon.inflate()
+	
+func _on_Balloon_inflated(var balloon):
+	inflatingBalloon = null
+
+func _on_Balloon_deflated(var balloon):
+	balloon.free()
+	
