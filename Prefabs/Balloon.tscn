@@ -32,7 +32,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Balloon" type="RigidBody2D" index="0"]
+[node name="Balloon" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -91,6 +91,17 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." index="5"]
+
+node_a = NodePath("")
+node_b = NodePath("..")
+bias = 0.0
+disable_collision = false
+length = 50.0
+rest_length = 0.0
+stiffness = 20.0
+damping = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_finished"]
 

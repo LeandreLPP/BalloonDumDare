@@ -155,14 +155,10 @@ func inflateBalloon():
 	inflatingBalloon = balloonPacked.instance()
 	inflatingBalloon.set_position(get_position())
 	
-	var spring = DampedSpringJoint2D.new()
+	var spring = inflatingBalloon.get_node("DampedSpringJoint2D")
 	
-	get_parent().add_child(inflatingBalloon)
-	add_child(spring)
-	
-	spring.set_node_a(inflatingBalloon.get_path())
-	spring.set_node_b(get_path())
-	spring.set_length(50)
+	get_parent().add_child(inflatingBalloon)	
+	spring.set_node_a(get_path())
 	
 func _on_Balloon_inflated():
 	pass
