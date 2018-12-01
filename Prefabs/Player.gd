@@ -25,6 +25,10 @@ onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
 var inflatingBalloon = null
 
 var balloons = []
+var selectedBalloon = null
+var selectedBalloonDist = 0
+var selectedBalloonGrav = 0
+var mouseVector = Vector2()
 
 onready var camera = get_node("Camera")
 
@@ -35,10 +39,15 @@ func _input(event):
 		launchBalloon()
 		
 	if event is InputEventMouseMotion:
-		var vec = (get_global_mouse_position() - get_position()).normalized()
-		var b = closestBalloon(vec)
-		print(b)
-		
+		if selectedBalloon:
+			selectedBalloon.set_gravity_scale(selectedBalloonGrav)
+		mouseVector = (get_global_mouse_position() - get_position()).normalized()
+		selectedBalloon = closestBalloon(mouseVector)
+		if selectedBalloon:
+			selectedBalloonGrav = selectedBalloon.get_gravity_scale()
+			selectedBalloon.set_gravity_scale(0)
+			selectedBalloonDist = (selectedBalloon.get_position() - get_position()).length()
+
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -54,6 +63,9 @@ func _integrate_forces(var s):
 	
 	if jump:
 		jump = true
+	
+	if selectedBalloon:
+		selectedBalloon.apply_impulse(Vector2(), mouseVector * 5)
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -201,5 +213,7 @@ func _on_Balloon_inflated(var balloon):
 
 func _on_Balloon_deflated(var balloon):
 	balloons.erase(balloon)
+	if selectedBalloon == balloon:
+		selectedBalloon = null
 	balloon.free()
 	
