@@ -37,7 +37,7 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
