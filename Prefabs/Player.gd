@@ -154,7 +154,7 @@ func _integrate_forces(var s):
 	
 	# Update siding
 	if new_siding_left != siding_left:
-		$anim.flip_h = new_siding_left
+		$medium_kid.flip_h = new_siding_left
 		siding_left = new_siding_left
 	
 	# Change animation
