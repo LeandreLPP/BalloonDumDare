@@ -67,7 +67,8 @@ func _integrate_forces(var s):
 		jump = true
 	
 	if selectedBalloon:
-		selectedBalloon.apply_impulse(Vector2(), mouseVector * 2)
+		var a = (selectedBalloon.get_position() - get_position()).normalized()
+		selectedBalloon.apply_impulse(Vector2(), mouseVector - a)
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
