@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stickman_nul.png-e5ed00c16dfa9a0dd0c93b0e476677c1.stex"
+path="res://.import/tileset_grass.png-c90448ae2feddbc865be1f4222321faa.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/stickman_nul.png"
-dest_files=[ "res://.import/stickman_nul.png-e5ed00c16dfa9a0dd0c93b0e476677c1.stex" ]
+source_file="res://Art/Sprites/tileset_grass.png"
+dest_files=[ "res://.import/tileset_grass.png-c90448ae2feddbc865be1f4222321faa.stex" ]
 
 [params]
 
