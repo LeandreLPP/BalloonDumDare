@@ -26,7 +26,7 @@ func _on_animation_finished(var animationName):
 func pierce(direction):
 	if inflated:
 		mass = 10
-		$Head.add_force(Vector2(0,0), direction * mass * propulsion_force)
+		add_force(Vector2(0,0), direction * mass * propulsion_force)
 		deflating = true
 		$deflating_sound.play()
 		$DeflatingTimer.start()
