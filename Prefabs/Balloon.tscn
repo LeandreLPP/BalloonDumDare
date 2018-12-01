@@ -1,36 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/Balloon.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="Animation" id=1]
 
-custom_solver_bias = 0.0
-radius = 37.0598
-
-[sub_resource type="SpriteFrames" id=2]
-
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "inflated",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "deflating",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "inflating",
-"speed": 5.0
-} ]
+resource_name = "inflate"
+length = 1.5
+loop = false
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [node name="Balloon" type="RigidBody2D"]
 
@@ -53,15 +43,26 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="Collision" type="CollisionPolygon2D" parent="." index="0"]
 
-shape = SubResource( 1 )
+position = Vector2( 0, -14 )
+build_mode = 0
+polygon = PoolVector2Array( 8, -4, 4, -8, 3, -9, -4, -9, -9, -4, -9, 6, -3, 14, 2, 14, 8, 6 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="1"]
 
-frames = SubResource( 2 )
-animation = "inflated"
+position = Vector2( 0, -13 )
+texture = ExtResource( 2 )
+hframes = 5
+frame = 3
+_sections_unfolded = [ "Animation" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DeflatingTimer" type="Timer" parent="." index="2"]
 
@@ -80,6 +81,9 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="deflating_sound" type="AudioStreamPlayer2D" parent="." index="4"]
 
@@ -91,6 +95,9 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." index="5"]
 
@@ -104,6 +111,17 @@ stiffness = 20.0
 damping = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_finished"]
+
+[node name="Animation" type="AnimationPlayer" parent="." index="5"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/inflate = SubResource( 1 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
 
 [connection signal="timeout" from="DeflatingTimer" to="." method="_on_DeflatingTimer_timeout"]
 
