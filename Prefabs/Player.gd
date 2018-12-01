@@ -24,10 +24,16 @@ var floor_h_velocity = 0.0
 onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
 var inflatingBalloon = null
 
+var lastBalloon = null
+
+onready var camera = get_node("Camera")
+
 func _input(event):	
 	if Input.is_action_pressed("inflate"):
 		inflateBalloon()
-
+	if Input.is_action_pressed("launch"):
+		launchBalloon()
+		
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -163,10 +169,18 @@ func inflateBalloon():
 	get_parent().add_child(inflatingBalloon)	
 	spring.set_node_a(get_path())
 	
-	inflatingBalloon.inflate()
+	inflatingBalloon.inflate(siding_left)
+	
+func launchBalloon():
+	if not lastBalloon:
+		return
+
+	var vec = (get_global_mouse_position() - get_position()).normalized()
+	lastBalloon.pierce(vec)
 	
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
+	lastBalloon = balloon
 
 func _on_Balloon_deflated(var balloon):
 	balloon.free()
