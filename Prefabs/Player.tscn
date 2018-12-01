@@ -44,10 +44,10 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 mode = 2
-mass = 40.0
+mass = 2.0
 friction = 0.0
 bounce = 0.0
-gravity_scale = 1.0
+gravity_scale = 3.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 5
@@ -66,7 +66,7 @@ WALK_MAX_VELOCITY = 300
 AIR_ACCEL = 1000
 AIR_DEACCEL = 1000
 JUMP_VELOCITY = 300
-STOP_JUMP_FORCE = 900
+STOP_JUMP_FORCE = 2000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 

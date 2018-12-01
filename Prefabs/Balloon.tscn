@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Prefabs/Balloon.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sounds/BallonDeflate.wav" type="AudioStream" id=3]
+[ext_resource path="res://Art/Sprites/stickman_nul.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 
@@ -22,13 +24,18 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="Balloon" type="RigidBody2D"]
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 1.62573
+
+[node name="Balloon" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 mode = 0
-mass = 1.0
+mass = 0.2
 friction = 1.0
 bounce = 1.0
 gravity_scale = -1.0
@@ -46,6 +53,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+propulsion_force = 600
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -87,7 +95,7 @@ __meta__ = {
 
 [node name="deflating_sound" type="AudioStreamPlayer2D" parent="." index="4"]
 
-stream = null
+stream = ExtResource( 3 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -114,14 +122,56 @@ _sections_unfolded = [ "Playback Options" ]
 
 node_a = NodePath("")
 node_b = NodePath("..")
+bias = 0.9
+disable_collision = true
+length = 30.0
+rest_length = 25.0
+stiffness = 25.0
+damping = 10.0
+
+[node name="Head" type="RigidBody2D" parent="." index="7"]
+
+position = Vector2( -0.565615, -22.3182 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 0.01
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Head" index="1"]
+
+node_a = NodePath("..")
+node_b = NodePath("../..")
 bias = 0.0
-disable_collision = false
-length = 50.0
-rest_length = 0.0
-stiffness = 20.0
-damping = 1.0
+disable_collision = true
+softness = 0.0
+
+[node name="Sprite2" type="Sprite" parent="Head" index="2"]
+
+position = Vector2( 0.309682, -0.408543 )
+scale = Vector2( 0.0818551, 0.0807083 )
+texture = ExtResource( 4 )
 
 [connection signal="timeout" from="DeflatingTimer" to="." method="_on_DeflatingTimer_timeout"]
+
+[connection signal="finished" from="deflating_sound" to="." method="_on_deflating_sound_finished"]
 
 [connection signal="animation_finished" from="Animation" to="." method="_on_animation_finished"]
 
