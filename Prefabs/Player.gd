@@ -5,6 +5,7 @@ var anim = ""
 var siding_left = false
 var jumping = false
 var stopping_jump = false
+var piercing = false
 
 export (int) var WALK_ACCEL = 800.0
 export (int) var WALK_DEACCEL = 800.0
@@ -20,6 +21,13 @@ var airborne_time = 1e20
 
 var floor_h_velocity = 0.0
 
+onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
+var inflatingBalloon = null
+
+func _input(event):	
+	if Input.is_action_pressed("inflate"):
+		inflateBalloon()
+
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -31,6 +39,7 @@ func _integrate_forces(var s):
 	var move_left = Input.is_action_pressed("move_left")
 	var move_right = Input.is_action_pressed("move_right")
 	var jump = Input.is_action_pressed("jump")
+	var launch = Input.is_action_just_pressed("launch")
 	
 	if jump:
 		jump = true
@@ -138,3 +147,22 @@ func _integrate_forces(var s):
 	# Finally, apply gravity and set back the linear velocity
 	lv += s.get_total_gravity() * step
 	s.set_linear_velocity(lv)
+	
+func inflateBalloon():
+	#if inflatingBalloon:
+	#	return
+	
+	inflatingBalloon = balloonPacked.instance()
+	inflatingBalloon.set_position(get_position())
+	
+	var spring = DampedSpringJoint2D.new()
+	
+	get_parent().add_child(inflatingBalloon)
+	add_child(spring)
+	
+	spring.set_node_a(inflatingBalloon.get_path())
+	spring.set_node_b(get_path())
+	spring.set_length(50)
+	
+func _on_Balloon_inflated():
+	pass

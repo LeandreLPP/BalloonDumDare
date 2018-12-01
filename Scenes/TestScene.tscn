@@ -64,7 +64,6 @@ shape = SubResource( 1 )
 [node name="Player" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 477.672, 349.068 )
-speed = 800
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Player" index="3"]
 
