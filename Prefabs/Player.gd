@@ -37,6 +37,8 @@ func _input(event):
 		inflateBalloon()
 	if Input.is_action_pressed("launch"):
 		launchBalloon()
+	if Input.is_action_pressed("detach"):
+		detachBalloon()
 		
 	if event is InputEventMouseMotion:
 		if selectedBalloon:
@@ -196,6 +198,16 @@ func launchBalloon():
 		return
 
 	b.pierce(vec)
+
+func detachBalloon():
+	var vec = (get_global_mouse_position() - get_position()).normalized()
+	var b = closestBalloon(vec)
+
+	if not b:
+		return
+
+	b.detach(vec)
+	balloons.erase(b)
 
 func closestBalloon(var vec):
 	var minV = 9999999
