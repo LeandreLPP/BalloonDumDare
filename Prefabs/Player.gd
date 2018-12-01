@@ -33,11 +33,11 @@ var mouseVector = Vector2()
 onready var camera = get_node("Camera")
 
 func _input(event):	
-	if Input.is_action_pressed("inflate"):
+	if Input.is_action_just_pressed("inflate"):
 		inflateBalloon()
-	if Input.is_action_pressed("launch"):
+	if Input.is_action_just_pressed("launch"):
 		launchBalloon()
-	if Input.is_action_pressed("detach"):
+	if Input.is_action_just_pressed("detach"):
 		detachBalloon()
 		
 	if event is InputEventMouseMotion:
