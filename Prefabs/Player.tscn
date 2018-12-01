@@ -14,7 +14,22 @@ height = 21.7625
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "jumping",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "falling",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
@@ -23,20 +38,20 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 mode = 2
 mass = 40.0
-friction = 1.0
+friction = 0.0
 bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 5
+contact_monitor = true
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
@@ -44,17 +59,24 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-speed = 400
+_sections_unfolded = [ "Collision", "Pickable" ]
+WALK_ACCEL = 2000
+WALK_DEACCEL = 2000
+WALK_MAX_VELOCITY = 300
+AIR_ACCEL = 1000
+AIR_DEACCEL = 1000
+JUMP_VELOCITY = 300
+STOP_JUMP_FORCE = 900
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="anim" type="AnimatedSprite" parent="." index="1"]
 
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-animation = "default"
+animation = "idle"
 _sections_unfolded = [ "Transform" ]
 
 [node name="Hand" type="StaticBody2D" parent="." index="2"]
@@ -73,5 +95,16 @@ bounce = 0.0
 position = Vector2( 18.1179, -1.61767 )
 shape = SubResource( 3 )
 disabled = true
+
+[node name="sound_jump" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = null
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 
