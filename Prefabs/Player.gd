@@ -24,7 +24,7 @@ var floor_h_velocity = 0.0
 onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
 var inflatingBalloon = null
 
-var lastBalloon = null
+var balloons = []
 
 onready var camera = get_node("Camera")
 
@@ -33,6 +33,11 @@ func _input(event):
 		inflateBalloon()
 	if Input.is_action_pressed("launch"):
 		launchBalloon()
+		
+	if event is InputEventMouseMotion:
+		var vec = (get_global_mouse_position() - get_position()).normalized()
+		var b = closestBalloon(vec)
+		print(b)
 		
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
@@ -172,16 +177,29 @@ func inflateBalloon():
 	inflatingBalloon.inflate(siding_left)
 	
 func launchBalloon():
-	if not lastBalloon:
+	var vec = (get_global_mouse_position() - get_position()).normalized()
+	var b = closestBalloon(vec)
+
+	if not b:
 		return
 
-	var vec = (get_global_mouse_position() - get_position()).normalized()
-	lastBalloon.pierce(vec)
-	
+	b.pierce(vec)
+
+func closestBalloon(var vec):
+	var minV = 9999999
+	var minB = null
+	for i in range(balloons.size()):
+		var bVec = balloons[i].get_position() - get_position()
+		if abs(bVec.angle() - vec.angle()) < minV:
+			minV = abs(bVec.angle() - vec.angle())
+			minB = balloons[i]
+	return minB
+
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
-	lastBalloon = balloon
+	balloons.append(balloon)
 
 func _on_Balloon_deflated(var balloon):
+	balloons.erase(balloon)
 	balloon.free()
 	
