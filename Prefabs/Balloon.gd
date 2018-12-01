@@ -31,6 +31,13 @@ func pierce(direction):
 		$deflating_sound.play()
 		$DeflatingTimer.start()
 
+func detach(direction):
+	if inflated:
+		$DampedSpringJoint2D.set_node_a("")
+		$DampedSpringJoint2D.queue_free()
+		pierce(direction)
+	
+
 func _on_DeflatingTimer_timeout():
 	emit_signal("finish_deflating")
 
