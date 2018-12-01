@@ -24,7 +24,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="Balloon" type="RigidBody2D" index="0"]
+[node name="Balloon" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -59,10 +59,11 @@ polygon = PoolVector2Array( 8, -4, 4, -8, 3, -9, -4, -9, -9, -4, -9, 6, -3, 14, 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 0, -13 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 hframes = 5
 frame = 3
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }

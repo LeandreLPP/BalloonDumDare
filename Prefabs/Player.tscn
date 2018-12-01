@@ -37,7 +37,7 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -70,15 +70,17 @@ AIR_DEACCEL = 1000
 JUMP_VELOCITY = 300
 STOP_JUMP_FORCE = 2000
 
-[node name="medium_kid" type="Sprite" parent="." index="0"]
+[node name="sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( -0.975046, -0.751403 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="collision" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( -1.66664, -1.31941 )
 shape = SubResource( 1 )
@@ -120,5 +122,34 @@ anims/idle = SubResource( 3 )
 anims/jumping = SubResource( 4 )
 anims/run = SubResource( 5 )
 blend_times = [  ]
+
+[node name="camera" type="Camera2D" parent="." index="5"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Offset", "Smoothing" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 
