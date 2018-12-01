@@ -14,3 +14,6 @@ func _on_OptionsButton_pressed():
 
 func _on_CreditsButton_pressed():
 	LevelManager.goto_credit_scene()
+
+func _on_QuitButton_pressed():
+	get_tree().quit()
