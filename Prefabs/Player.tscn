@@ -1,42 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/Player.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/stickman_nul.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/medium_kid.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 19.12
-height = 21.7625
-
-[sub_resource type="SpriteFrames" id=2]
-
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "jumping",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "falling",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-} ]
-
-[sub_resource type="CircleShape2D" id=3]
-
-custom_solver_bias = 0.0
-radius = 10.0
+radius = 8.27651
+height = 12.8086
 
 [node name="Player" type="RigidBody2D"]
 
@@ -60,6 +31,9 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable" ]
+__meta__ = {
+"_edit_lock_": true
+}
 WALK_ACCEL = 2000
 WALK_DEACCEL = 2000
 WALK_MAX_VELOCITY = 300
@@ -68,36 +42,25 @@ AIR_DEACCEL = 1000
 JUMP_VELOCITY = 300
 STOP_JUMP_FORCE = 2000
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="medium_kid" type="Sprite" parent="." index="0"]
 
+position = Vector2( -0.975046, -0.751403 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -1.66664, -1.31941 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="anim" type="AnimatedSprite" parent="." index="1"]
+[node name="sound_jump" type="AudioStreamPlayer2D" parent="." index="2"]
 
-scale = Vector2( 2, 2 )
-frames = SubResource( 2 )
-animation = "idle"
-_sections_unfolded = [ "Transform" ]
-
-[node name="Hand" type="StaticBody2D" parent="." index="2"]
-
-editor/display_folded = true
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand" index="0"]
-
-position = Vector2( 18.1179, -1.61767 )
-shape = SubResource( 3 )
-disabled = true
-
-[node name="sound_jump" type="AudioStreamPlayer2D" parent="." index="3"]
-
+position = Vector2( 0.0338669, -0.238248 )
 stream = null
 volume_db = 0.0
 pitch_scale = 1.0
@@ -106,5 +69,15 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hand" type="Position2D" parent="." index="3"]
+
+position = Vector2( -8.0252, -11.257 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 
