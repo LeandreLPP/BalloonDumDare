@@ -5,7 +5,7 @@
 [ext_resource path="res://Art/Tilesets/grass_dirt_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://Prefabs/DeathLine.tscn" type="PackedScene" id=4]
 
-[node name="Level2Scene" type="Node" index="0"]
+[node name="Level3Scene" type="Node" index="0"]
 
 [node name="Player" parent="." index="0" instance=ExtResource( 1 )]
 
