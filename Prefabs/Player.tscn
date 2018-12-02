@@ -73,6 +73,7 @@ AIR_DEACCEL = 1000
 JUMP_VELOCITY = 300
 STOP_JUMP_FORCE = 2000
 BALLOON_DIST = 40
+BALLOONS_COUNT = 4
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 

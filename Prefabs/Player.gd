@@ -15,6 +15,7 @@ export (int) var AIR_DEACCEL = 200.0
 export (int) var JUMP_VELOCITY = 460
 export (int) var STOP_JUMP_FORCE = 900.0
 export (int) var BALLOON_DIST = 40
+export (int) var BALLOONS_COUNT = 4
 
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
 
@@ -185,6 +186,11 @@ func _integrate_forces(var s):
 func inflateBalloon():
 	if inflatingBalloon:
 		return
+	
+	if not BALLOONS_COUNT:
+		return
+
+	BALLOONS_COUNT -= 1
 	
 	inflatingBalloon = balloonPacked.instance()
 	inflatingBalloon.set_position(get_position())
