@@ -57,7 +57,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[node name="Balloon" type="RigidBody2D"]
+[node name="Balloon" type="RigidBody2D" index="0"]
 
 position = Vector2( 0, 1 )
 input_pickable = false
@@ -69,7 +69,7 @@ friction = 1.0
 bounce = 1.0
 gravity_scale = -1.0
 custom_integrator = false
-continuous_cd = 0
+continuous_cd = 2
 contacts_reported = 0
 contact_monitor = false
 sleeping = false
@@ -79,6 +79,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear" ]
 propulsion_force = 600
 GRAV_SCALE = -1
 
