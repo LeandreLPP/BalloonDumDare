@@ -47,6 +47,9 @@ func _input(event):
 				selectedBalloon.stopFollowingTarget()
 			selectedBalloon = newSelectedBalloon
 
+func _process(delta):
+	$arm.rotation = get_local_mouse_position().angle() + PI/2
+
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -64,9 +67,17 @@ func _integrate_forces(var s):
 		jump = true
 	
 	if selectedBalloon:
-		selectedBalloon.setTargetPosition(get_global_position() + (mouseVector * BALLOON_DIST), mouseVector.angle())
-		# var a = (selectedBalloon.get_position() - get_position()).normalized()
-		# selectedBalloon.apply_impulse(Vector2(), mouseVector - a)
+		var space_state = get_world_2d().direct_space_state
+		var target_pos = get_global_position() + (mouseVector * BALLOON_DIST)
+		var ignore = [self]
+		for bal in balloons:
+			ignore.append(bal)
+		if inflatingBalloon:
+			ignore.append(inflatingBalloon)
+		var result = space_state.intersect_ray(get_global_position(), target_pos, ignore)
+		if result:
+			target_pos = result.position
+		selectedBalloon.setTargetPosition(target_pos, mouseVector.angle())
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -209,18 +220,21 @@ func detachBalloon():
 	balloons.erase(b)
 
 func closestBalloon(var vec):
-	var minV = 9999999
-	var minB = null
-	for i in range(balloons.size()):
-		var bVec = balloons[i].get_position() - get_position()
-		if abs(bVec.angle() - vec.angle()) < minV:
-			minV = abs(bVec.angle() - vec.angle())
-			minB = balloons[i]
-	return minB
+	if balloons.size() == 0:
+		return null
+	return balloons[0]
+#	var minV = 9999999
+#	var minB = null
+#	for i in range(balloons.size()):
+#		var bVec = balloons[i].get_position() - get_position()
+#		if abs(bVec.angle() - vec.angle()) < minV:
+#			minV = abs(bVec.angle() - vec.angle())
+#			minB = balloons[i]
+#	return minB
 
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
-	balloon.setHand($hand)
+	balloon.setHand($arm/hand)
 	balloons.append(balloon)
 
 func _on_Balloon_deflated(var balloon):

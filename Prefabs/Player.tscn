@@ -104,14 +104,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="hand" type="Position2D" parent="." index="3"]
-
-position = Vector2( -8.0252, -11.257 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="anim" type="AnimationPlayer" parent="." index="4"]
+[node name="anim" type="AnimationPlayer" parent="." index="3"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -124,7 +117,7 @@ anims/jumping = SubResource( 4 )
 anims/run = SubResource( 5 )
 blend_times = [  ]
 
-[node name="camera" type="Camera2D" parent="." index="5"]
+[node name="camera" type="Camera2D" parent="." index="4"]
 
 anchor_mode = 1
 rotating = false
@@ -152,5 +145,22 @@ _sections_unfolded = [ "Drag Margin", "Offset", "Smoothing" ]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="arm" type="Position2D" parent="." index="5"]
+
+position = Vector2( -4.66716, -3.25737 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="arm" index="0"]
+
+position = Vector2( 0, -4 )
+scale = Vector2( 0.053839, 0.0895612 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="hand" type="Position2D" parent="arm" index="1"]
+
+position = Vector2( 0, -8 )
+_sections_unfolded = [ "Transform" ]
 
 
