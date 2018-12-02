@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Art/Sprites/SkyALittleLessBasic.png" type="Texture" id=1]
+[ext_resource path="res://Art/Sprites/BasicSky.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/GUIs/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Sprites/clouds.png" type="Texture" id=3]
 
-[node name="LevelGUI" type="Node"]
+[node name="LevelGUI" type="Node" index="0"]
 
 [node name="CanvasLayerBackground" type="CanvasLayer" parent="." index="0"]
 
-layer = -1
+layer = -2
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
@@ -39,5 +40,33 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="HUD" parent="CanvasLayerGUI" index="0" instance=ExtResource( 2 )]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="2"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( 0, 0 )
+scroll_limit_end = Vector2( 0, 0 )
+scroll_ignore_camera_zoom = false
+_sections_unfolded = [ "Scroll" ]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+
+motion_scale = Vector2( 0.5, 0.3 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 0, 0 )
+_sections_unfolded = [ "Motion", "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+
+position = Vector2( 125.993, -127.613 )
+scale = Vector2( 0.566549, 0.566549 )
+texture = ExtResource( 3 )
 
 

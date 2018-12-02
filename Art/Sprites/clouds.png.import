@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SkyALittleLessBasic.png-d11857068802a8728afb032021ad27e8.stex"
+path="res://.import/clouds.png-33c5f761b847e65e74ab64223f435795.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/SkyALittleLessBasic.png"
-dest_files=[ "res://.import/SkyALittleLessBasic.png-d11857068802a8728afb032021ad27e8.stex" ]
+source_file="res://Art/Sprites/clouds.png"
+dest_files=[ "res://.import/clouds.png-33c5f761b847e65e74ab64223f435795.stex" ]
 
 [params]
 
