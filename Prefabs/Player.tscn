@@ -7,10 +7,11 @@
 [ext_resource path="res://Art/Sounds/Weee2.wav" type="AudioStream" id=5]
 [ext_resource path="res://Art/Sounds/Weee3.wav" type="AudioStream" id=6]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 7.40732, 13.6086 )
+radius = 7.63758
+height = 12.3993
 
 [sub_resource type="Animation" id=2]
 
@@ -84,7 +85,7 @@ _sections_unfolded = [ "Offset", "Transform" ]
 [node name="collision" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( 0.33336, -0.298471 )
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="sound_jump" type="AudioStreamPlayer2D" parent="." index="2"]
 
