@@ -11,6 +11,7 @@ signal finish_deflating
 var target_pos
 var target_angle
 var set_target = false
+var exploding = false
 
 var available_colors = [
 	Color("ac3232"),  # red
@@ -89,8 +90,10 @@ func detach(direction):
 		
 
 func explode():
-	$Animation.play("paf")
-	$explode_sound.play()
+	if not exploding:
+		exploding = true
+		$Animation.play("paf")
+		$explode_sound.play()
 
 func _on_DeflatingTimer_timeout():
 	emit_signal("finish_deflating")
