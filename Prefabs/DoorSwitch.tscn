@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 5.00282, 27.9708 )
+extents = Vector2( 6.55943, 24.1312 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -23,7 +23,7 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[node name="DoorSwitch" type="StaticBody2D"]
+[node name="DoorSwitch" type="StaticBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -34,17 +34,21 @@ friction = 1.0
 bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
+position = Vector2( -0.5, 0 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
-position = Vector2( 0.284489, 0.0733681 )
-scale = Vector2( 0.157603, 0.767157 )
 frames = SubResource( 2 )
 animation = "closed"
+_sections_unfolded = [ "Transform" ]
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="." index="2"]
 

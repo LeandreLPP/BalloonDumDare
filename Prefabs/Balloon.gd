@@ -56,7 +56,7 @@ func _on_animation_finished(var animationName):
 func pierce(direction):
 	if inflated:
 		stopFollowingTarget()
-		mass = 10
+		mass = 4
 		set_gravity_scale(0)
 		add_force(Vector2(0,0), direction * mass * propulsion_force)
 		deflating = true
