@@ -41,7 +41,7 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="Player" type="RigidBody2D" index="0"]
+[node name="Player" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -68,12 +68,12 @@ __meta__ = {
 }
 WALK_ACCEL = 2000
 WALK_DEACCEL = 2000
-WALK_MAX_VELOCITY = 300
-AIR_ACCEL = 1000
-AIR_DEACCEL = 1000
+WALK_MAX_VELOCITY = 200
+AIR_ACCEL = 800
+AIR_DEACCEL = 800
 JUMP_VELOCITY = 300
 STOP_JUMP_FORCE = 2000
-BALLOON_DIST = 40
+BALLOON_DIST = 4
 BALLOONS_COUNT = 4
 
 [node name="sprite" type="Sprite" parent="." index="0"]
