@@ -25,8 +25,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="Balloon" type="RigidBody2D"]
+[node name="Balloon" type="RigidBody2D" index="0"]
 
+position = Vector2( 0, 1 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -46,9 +47,6 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 propulsion_force = 600
 GRAV_SCALE = -1
 
@@ -61,7 +59,6 @@ polygon = PoolVector2Array( 8, -4, 4, -8, 3, -9, -4, -9, -9, -4, -9, 6, -3, 14, 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 0, -13 )
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 hframes = 5
 frame = 3
@@ -118,6 +115,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." index="6"]
 
+position = Vector2( 0, -1 )
 node_a = NodePath("")
 node_b = NodePath("..")
 bias = 0.9
@@ -132,6 +130,7 @@ damping = 10.0
 points = PoolVector2Array( 0, 0 )
 width = 1.0
 default_color = Color( 0.800781, 0.800781, 0.800781, 1 )
+texture_mode = -435427824
 sharp_limit = 2.0
 round_precision = 8
 script = ExtResource( 5 )
