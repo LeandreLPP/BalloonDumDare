@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 5.40803, 26.1404 )
+extents = Vector2( 5.00282, 27.9708 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -23,15 +23,15 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[node name="DoorSwitch" type="Area2D"]
+[node name="DoorSwitch" type="StaticBody2D"]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
