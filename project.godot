@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 LevelManager="*res://LevelManager.gd"
+MusicPlayer="*res://Prefabs/MusicPlayer.tscn"
 
 [importer_defaults]
 

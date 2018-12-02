@@ -5,27 +5,37 @@ var current_scene = null
 var azerty = true
 var current_level = 1
 export (int) var MIN_LEVEL = 1
-export (int) var MAX_LEVEL = 1
+export (int) var MAX_LEVEL = 2
+
+onready var music = get_node("/root/MusicPlayer")
 
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 func goto_main_menu():
+	music.inGame = false
 	goto_scene("res://Scenes/MainMenuScene.tscn")
 
 func goto_credit_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/CreditsScene.tscn")
 	
 func goto_levels_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/LevelsScene.tscn")
 	
 func goto_options_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/OptionsScene.tscn")
 
+func reload_level():
+	goto_level(current_level)
+
 func goto_level(level):
-	if level < 0:
-		goto_level(0)
+	music.inGame = true
+	if level < MIN_LEVEL:
+		goto_level(MIN_LEVEL)
 	elif level <= MAX_LEVEL:
 		current_level = level
 		goto_scene("res://Scenes/Levels/Level" + str(level) + "Scene.tscn")

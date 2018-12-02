@@ -234,7 +234,7 @@ editor/display_folded = true
 position = Vector2( 56, 56 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 32, 0, 16, 16 )
+region_rect = Rect2( 32, 32, 16, 16 )
 _sections_unfolded = [ "Region", "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Dirt Closed Corner" index="0"]
