@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Prefabs/DoorSwitch.gd" type="Script" id=1]
+[ext_resource path="res://Art/Sprites/Door.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sounds/SwitchOnOff.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5.40803, 26.1404 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "closed",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "opened",
+"speed": 6.0
+} ]
+
+[node name="DoorSwitch" type="Area2D"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+
+position = Vector2( 0.284489, 0.0733681 )
+scale = Vector2( 0.157603, 0.767157 )
+frames = SubResource( 2 )
+animation = "closed"
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+position = Vector2( 1.66479, -7.62939e-006 )
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+
