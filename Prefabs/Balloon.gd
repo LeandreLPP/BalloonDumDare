@@ -12,6 +12,15 @@ var target_pos
 var target_angle
 var set_target = false
 
+var available_colors = [
+	Color("ac3232"),  # red
+	Color("6abe30"), # green
+	Color("5b6ee1"), # blue
+	Color("df7126"), # orange
+	Color("76428a"), # purple
+	Color("37946e"), # teal
+]
+
 func setHand(hand):
 	$Rope.hand = hand
 
@@ -40,6 +49,10 @@ func _physics_process(delta):
 func _ready():
 	set_gravity_scale(0)
 	set_mode(RigidBody2D.MODE_STATIC)
+	
+	randomize()
+	var random_color = available_colors[randi() % len(available_colors)]
+	$Sprite.set_modulate(random_color)
 
 func inflate(siding_left):
 	if not inflated:
