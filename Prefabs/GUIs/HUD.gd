@@ -13,3 +13,6 @@ func _process(delta):
 
 func _on_RestartButton_pressed():
 	LevelManager.reload_level()
+
+func _on_MenuButton_pressed():
+	LevelManager.goto_main_menu()
