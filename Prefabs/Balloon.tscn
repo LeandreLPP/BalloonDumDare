@@ -25,6 +25,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 5, 6, 7, 8, 5 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -6, 7, -2, 12, 1, 12, 5, 7, 5, -3, 2, -6, -3, -6, -6, -3 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 
@@ -42,6 +54,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -1, 9, -1, 12, 2, 10, 2, 7 ), PoolVector2Array( -3, 6, -1, 12, 0, 12, 2, 6, 1, 2, -2, 2 ), PoolVector2Array( -6, 7, -2, 12, 1, 12, 5, 7, 5, -1, 2, -4, -3, -4, -6, -1 ), PoolVector2Array( 7, -3, 2, -8, -3, -8, -8, -3, -8, 5, -2, 12, 1, 12, 7, 5 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -74,7 +98,7 @@ tracks/1/keys = {
 "values": [ 3, 4 ]
 }
 
-[node name="Balloon" type="RigidBody2D" index="0"]
+[node name="Balloon" type="RigidBody2D"]
 
 position = Vector2( 0, 1 )
 input_pickable = false
@@ -104,7 +128,7 @@ GRAV_SCALE = -10
 
 position = Vector2( 0, -14 )
 build_mode = 0
-polygon = PoolVector2Array( 8, -4, 4, -8, 3, -9, -4, -9, -9, -4, -9, 6, -3, 14, 2, 14, 8, 6 )
+polygon = PoolVector2Array( -6, 7, -2, 12, 1, 12, 5, 7, 5, -3, 2, -6, -3, -6, -6, -3 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
@@ -112,7 +136,7 @@ position = Vector2( 0, -13 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 5
-frame = 7
+frame = 5
 _sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
