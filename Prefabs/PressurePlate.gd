@@ -7,8 +7,12 @@ func _on_PressurePlate_body_entered(body):
 	var p = self.get_path_to(body)
 	if p.get_name(p.get_name_count() - 1) == "Player":
 		emit_signal("pressed")
+		$Sprite.play("on")
+		$AudioOn.play()
 
 func _on_PressurePlate_body_exited(body):
 	var p = self.get_path_to(body)
 	if p.get_name(p.get_name_count() - 1) == "Player":
 		emit_signal("released")
+		$Sprite.play("off")
+		$AudioOff.play()

@@ -1,12 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Prefabs/PressurePlate.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/tileset_grass.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/ButtonOn.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/ButtonOff.png" type="Texture" id=3]
+[ext_resource path="res://Art/Sounds/SwitchOn.wav" type="AudioStream" id=4]
+[ext_resource path="res://Art/Sounds/SwitchOff.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 91.6179, 94.0055 )
+extents = Vector2( 21.9693, 3.83956 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "on",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "off",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
 
 [node name="PressurePlate" type="Area2D"]
 
@@ -18,15 +36,39 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="AnimatedSprite" parent="." index="1"]
 
-position = Vector2( 33.3112, 29.6099 )
-texture = ExtResource( 2 )
+frames = SubResource( 2 )
+animation = "off"
+
+[node name="AudioOn" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="AudioOff" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="body_entered" from="." to="." method="_on_PressurePlate_body_entered"]
 
