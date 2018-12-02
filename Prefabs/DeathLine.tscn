@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/DeathLine.gd" type="Script" id=1]
+
+[sub_resource type="LineShape2D" id=1]
+
+custom_solver_bias = 0.0
+normal = Vector2( 0, -1 )
+d = 30.1842
+
+[node name="DeathLine" type="Area2D" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+player = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 8, 176 )
+scale = Vector2( 10.0194, 1.63889 )
+shape = SubResource( 1 )
+
+

@@ -5,7 +5,7 @@ var current_scene = null
 var azerty = true
 var current_level = 1
 export (int) var MIN_LEVEL = 1
-export (int) var MAX_LEVEL = 1
+export (int) var MAX_LEVEL = 2
 
 onready var music = get_node("/root/MusicPlayer")
 
@@ -29,10 +29,13 @@ func goto_options_scene():
 	music.inGame = false
 	goto_scene("res://Scenes/OptionsScene.tscn")
 
+func reload_level():
+	goto_level(current_level)
+
 func goto_level(level):
 	music.inGame = true
-	if level < 0:
-		goto_level(0)
+	if level < MIN_LEVEL:
+		goto_level(MIN_LEVEL)
 	elif level <= MAX_LEVEL:
 		current_level = level
 		goto_scene("res://Scenes/Levels/Level" + str(level) + "Scene.tscn")
