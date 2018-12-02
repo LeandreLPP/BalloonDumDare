@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SwitchOnOff.wav-1eb6b01452f97ed31ec7f503cf53ea2c.sample"
+
+[deps]
+
+source_file="res://Art/Sounds/SwitchOnOff.wav"
+dest_files=[ "res://.import/SwitchOnOff.wav-1eb6b01452f97ed31ec7f503cf53ea2c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Prefabs/BalloonSwitch.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/SwitchOn.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/SwitchOff.png" type="Texture" id=3]
+[ext_resource path="res://Art/Sounds/SwitchOnOff.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 310.621, 50.4758 )
+extents = Vector2( 8, 5 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "on",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "off",
+"speed": 5.0
+} ]
 
 [node name="BalloonSwitch" type="Area2D"]
 
@@ -24,9 +40,21 @@ RESETABLE = false
 
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
-texture = ExtResource( 2 )
+frames = SubResource( 2 )
+animation = "off"
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="body_entered" from="." to="." method="_on_BalloonSwitch_body_entered"]
 
