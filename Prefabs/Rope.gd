@@ -10,5 +10,5 @@ func _process(delta):
 			add_point(pos_point)
 		else:
 			set_point_position(1, pos_point)
-	else:
+	elif get_point_count() >= 2:
 		remove_point(1)
