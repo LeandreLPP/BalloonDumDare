@@ -64,6 +64,7 @@ func _on_animation_finished(var animationName):
 		inflated = true
 		set_gravity_scale(GRAV_SCALE)
 		set_mode(RigidBody2D.MODE_RIGID)
+		apply_impulse(Vector2(0, 0), Vector2(0, 0))
 		emit_signal("finish_inflating")
 
 func pierce(direction):

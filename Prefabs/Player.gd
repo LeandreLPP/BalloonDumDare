@@ -253,7 +253,6 @@ func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
 	balloon.stopFollowingTarget()
 	balloon.setHand($arm/hand)
-	balloon.apply_impulse(Vector2(0, 0), Vector2(-1, -1))
 	balloons.append(balloon)
 
 func _on_Balloon_deflated(var balloon):

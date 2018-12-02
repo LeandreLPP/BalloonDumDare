@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/CreditsScene.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/BasicSky.png" type="Texture" id=2]
-[ext_resource path="res://Art/Fonts/Gretoon.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Prefabs/Balloon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Sprites/BasicSky.png" type="Texture" id=3]
+[ext_resource path="res://Art/Fonts/Gretoon.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 3 )
+font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
@@ -17,7 +18,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 size = 30
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 3 )
+font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=3]
@@ -25,12 +26,20 @@ _sections_unfolded = [ "Font", "Settings" ]
 size = 20
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 3 )
+font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Curve2D" id=4]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 4.88109, 621.394, 0, 0, 0, 0, 39.55, 669.629, 0, 0, 0, 0, 943.955, 666.614, 0, 0, 0, 0, 995.205, 622.901, 0, 0, 0, 0, 4.88109, 621.394 )
+}
 
 [node name="CreditsScene" type="Node" index="0"]
 
 script = ExtResource( 1 )
+Balloon = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="." index="0"]
 
@@ -44,12 +53,13 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="." index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -204,6 +214,35 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
+[node name="TimerPopBalloon" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.33
+one_shot = false
+autostart = true
+
+[node name="PathPop" type="Path2D" parent="." index="3"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+curve = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BalloonSpawnLocation" type="PathFollow2D" parent="PathPop" index="0"]
+
+position = Vector2( 80.2482, 491.762 )
+rotation = 0.86459
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
+
+[connection signal="timeout" from="TimerPopBalloon" to="." method="_on_TimerPopBalloon_timeout"]
 
 
