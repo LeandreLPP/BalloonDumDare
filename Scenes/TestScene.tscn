@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Plateforme.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/BalloonSwitch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/PressurePlate.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -48,10 +49,15 @@ position = Vector2( 477.672, 349.068 )
 
 [node name="BalloonSwitch" parent="." index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 565.254, 375.329 )
-rotation = -1.84599
+position = Vector2( 555.277, 447.419 )
+rotation = -1.5708
+_sections_unfolded = [ "Transform" ]
 RESETABLE = true
 
-[connection signal="switched" from="BalloonSwitch" to="." method="_on_BalloonSwitch_switched"]
+[node name="PressurePlate" parent="." index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 427.3, 503.139 )
+
+[connection signal="pressed" from="BalloonSwitch" to="." method="_on_BalloonSwitch_pressed"]
 
 
