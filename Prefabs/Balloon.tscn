@@ -1,11 +1,52 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Prefabs/Balloon.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=2]
-[ext_resource path="res://Art/Sounds/GonflageCut.wav" type="AudioStream" id=3]
-[ext_resource path="res://Art/Sounds/BallonDeflate.wav" type="AudioStream" id=4]
-[ext_resource path="res://Art/Sounds/Paf.wav" type="AudioStream" id=5]
-[ext_resource path="res://Prefabs/Rope.gd" type="Script" id=6]
+[ext_resource path="res://Art/Sprites/particle.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=3]
+[ext_resource path="res://Art/Sounds/GonflageCut.wav" type="AudioStream" id=4]
+[ext_resource path="res://Art/Sounds/BallonDeflate.wav" type="AudioStream" id=5]
+[ext_resource path="res://Art/Sounds/Paf.wav" type="AudioStream" id=6]
+[ext_resource path="res://Prefabs/Rope.gd" type="Script" id=7]
+
+[sub_resource type="ParticlesMaterial" id=4]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 2.5
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 60.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.0
+angular_velocity = -100.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 10.0
+linear_accel_random = 1.0
+radial_accel = 0.0
+radial_accel_random = 1.0
+tangential_accel = 5.0
+tangential_accel_random = 1.0
+damping = 5.0
+damping_random = 0.0
+angle = 80.0
+angle_random = 0.0
+scale = 0.5
+scale_random = 0.0
+color = Color( 1, 1, 1, 0.889529 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Damping", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
 [sub_resource type="Animation" id=1]
 
@@ -98,7 +139,7 @@ tracks/1/keys = {
 "values": [ 3, 4 ]
 }
 
-[node name="Balloon" type="RigidBody2D"]
+[node name="Balloon" type="RigidBody2D" index="0"]
 
 position = Vector2( 0, 1 )
 input_pickable = false
@@ -124,16 +165,43 @@ _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear" ]
 propulsion_force = 600
 GRAV_SCALE = -10
 
-[node name="Collision" type="CollisionPolygon2D" parent="." index="0"]
+[node name="air_particles" type="Particles2D" parent="." index="0"]
+
+position = Vector2( -0.907814, 1.31563 )
+rotation = 1.56658
+emitting = false
+amount = 10
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 2.5
+explosiveness = 0.2
+randomness = 0.6
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 4 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform" ]
+
+[node name="Collision" type="CollisionPolygon2D" parent="." index="1"]
 
 position = Vector2( 0, -14 )
 build_mode = 0
 polygon = PoolVector2Array( -6, 7, -2, 12, 1, 12, 5, 7, 5, -3, 2, -6, -3, -6, -6, -3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="2"]
 
 position = Vector2( 0, -13 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 vframes = 2
 hframes = 5
 frame = 5
@@ -142,28 +210,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DeflatingTimer" type="Timer" parent="." index="2"]
+[node name="DeflatingTimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
 wait_time = 5.0
 one_shot = false
 autostart = false
 
-[node name="inflating_sound" type="AudioStreamPlayer2D" parent="." index="3"]
-
-stream = ExtResource( 3 )
-volume_db = -5.0
-pitch_scale = 1.0
-autoplay = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="deflating_sound" type="AudioStreamPlayer2D" parent="." index="4"]
+[node name="inflating_sound" type="AudioStreamPlayer2D" parent="." index="4"]
 
 stream = ExtResource( 4 )
 volume_db = -5.0
@@ -177,9 +231,23 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="explode_sound" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="deflating_sound" type="AudioStreamPlayer2D" parent="." index="5"]
 
 stream = ExtResource( 5 )
+volume_db = -5.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="explode_sound" type="AudioStreamPlayer2D" parent="." index="6"]
+
+stream = ExtResource( 6 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -187,8 +255,11 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Animation" type="AnimationPlayer" parent="." index="6"]
+[node name="Animation" type="AnimationPlayer" parent="." index="7"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -201,8 +272,9 @@ anims/paf = SubResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." index="7"]
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." index="8"]
 
+visible = false
 position = Vector2( 0, -1 )
 node_a = NodePath("")
 node_b = NodePath("..")
@@ -212,8 +284,11 @@ length = 10.0
 rest_length = 10.0
 stiffness = 25.0
 damping = 10.0
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Rope" type="Line2D" parent="." index="8"]
+[node name="Rope" type="Line2D" parent="." index="9"]
 
 points = PoolVector2Array( 0, 0 )
 width = 1.0
@@ -221,7 +296,7 @@ default_color = Color( 0.800781, 0.800781, 0.800781, 1 )
 texture_mode = -435427824
 sharp_limit = 2.0
 round_precision = 8
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [connection signal="timeout" from="DeflatingTimer" to="." method="_on_DeflatingTimer_timeout"]
 
