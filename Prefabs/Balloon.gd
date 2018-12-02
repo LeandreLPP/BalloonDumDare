@@ -75,6 +75,7 @@ func pierce(direction):
 		stopFollowingTarget()
 		mass = 4
 		set_gravity_scale(0)
+		set_linear_velocity(Vector2(0, 0))
 		add_force(Vector2(0,0), direction * mass * propulsion_force)
 		deflating = true
 		$deflating_sound.play()
