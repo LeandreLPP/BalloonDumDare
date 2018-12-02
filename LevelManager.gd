@@ -5,7 +5,7 @@ var current_scene = null
 var azerty = true
 var current_level = 1
 export (int) var MIN_LEVEL = 1
-export (int) var MAX_LEVEL = 6
+export (int) var MAX_LEVEL = 7
 
 onready var music = get_node("/root/MusicPlayer")
 
