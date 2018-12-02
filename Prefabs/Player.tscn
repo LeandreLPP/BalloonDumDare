@@ -7,11 +7,10 @@
 [ext_resource path="res://Art/Sounds/Weee2.wav" type="AudioStream" id=5]
 [ext_resource path="res://Art/Sounds/Weee3.wav" type="AudioStream" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
-radius = 8.27651
-height = 12.8086
+extents = Vector2( 7.40732, 13.6086 )
 
 [sub_resource type="Animation" id=2]
 
@@ -78,20 +77,14 @@ BALLOONS_COUNT = 4
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( -1.97505, -0.751403 )
+position = Vector2( 0, -0.751403 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -1.66664, -1.31941 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 0.33336, -0.298471 )
+shape = SubResource( 6 )
 
 [node name="sound_jump" type="AudioStreamPlayer2D" parent="." index="2"]
 
@@ -152,19 +145,28 @@ __meta__ = {
 
 [node name="arm" type="Position2D" parent="." index="5"]
 
-position = Vector2( -4.71994, -2.35917 )
+position = Vector2( -3.71969, -2.26103 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="arm" index="0"]
 
 position = Vector2( 0, -4 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="hand" type="Position2D" parent="arm" index="1"]
 
 position = Vector2( 0.0224676, -8.98969 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="wees" type="Position2D" parent="." index="6"]
 

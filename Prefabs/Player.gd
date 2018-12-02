@@ -26,6 +26,8 @@ var floor_h_velocity = 0.0
 onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
 var inflatingBalloon = null
 
+onready var position_x_arm = $arm.position.x
+
 var balloons = []
 var selectedBalloon = null
 var mouseVector = Vector2()
@@ -167,6 +169,7 @@ func _integrate_forces(var s):
 	# Update siding
 	if new_siding_left != siding_left:
 		$sprite.flip_h = new_siding_left
+		$arm.position.x = -position_x_arm if new_siding_left else position_x_arm
 		siding_left = new_siding_left
 	
 	# Change animation
