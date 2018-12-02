@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Plateforme.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/BalloonSwitch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/PressurePlate.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Prefabs/Spike.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -52,11 +53,20 @@ position = Vector2( 477.672, 349.068 )
 position = Vector2( 555.277, 447.419 )
 rotation = -1.5708
 _sections_unfolded = [ "Transform" ]
-RESETABLE = true
 
 [node name="PressurePlate" parent="." index="4" instance=ExtResource( 6 )]
 
 position = Vector2( 427.3, 503.139 )
+
+[node name="Spike" parent="." index="5" instance=ExtResource( 7 )]
+
+position = Vector2( 590.878, 337.645 )
+rotation = -2.1557
+
+[node name="Spike2" parent="." index="6" instance=ExtResource( 7 )]
+
+position = Vector2( 494.408, 292.424 )
+rotation = -2.93103
 
 [connection signal="pressed" from="BalloonSwitch" to="." method="_on_BalloonSwitch_pressed"]
 

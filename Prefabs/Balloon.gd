@@ -73,11 +73,13 @@ func detach(direction):
 func explode():
 	$Animation.play("paf")
 	$explode_sound.play()
-	queue_free()
-	emit_signal("finish_deflating")
 
 func _on_DeflatingTimer_timeout():
 	emit_signal("finish_deflating")
 
 func _on_deflating_sound_finished():
+	emit_signal("finish_deflating")
+
+func _on_explode_sound_finished():
+	queue_free()
 	emit_signal("finish_deflating")
