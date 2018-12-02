@@ -29,8 +29,6 @@ var balloons = []
 var selectedBalloon = null
 var mouseVector = Vector2()
 
-onready var camera = get_node("Camera")
-
 func _input(event):	
 	if Input.is_action_just_pressed("inflate"):
 		inflateBalloon()
@@ -41,6 +39,7 @@ func _input(event):
 		
 	if event is InputEventMouseMotion:
 		mouseVector = get_local_mouse_position().normalized()
+		$PointerTimer.start()
 		var newSelectedBalloon = closestBalloon(mouseVector)
 		if selectedBalloon != newSelectedBalloon:
 			if selectedBalloon:
@@ -247,3 +246,8 @@ func _on_Balloon_deflated(var balloon):
 func playRandomWee():
 	var i = floor(rand_range(0, $wees.get_child_count()))
 	$wees.get_child(i).play()
+
+func _on_PointerTimer_timeout():
+	if selectedBalloon:
+		selectedBalloon.stopFollowingTarget()
+	selectedBalloon = null

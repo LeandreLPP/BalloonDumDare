@@ -151,7 +151,6 @@ __meta__ = {
 
 [node name="arm" type="Position2D" parent="." index="5"]
 
-editor/display_folded = true
 position = Vector2( -4.66716, -3.25737 )
 _sections_unfolded = [ "Transform" ]
 
@@ -203,5 +202,14 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="PointerTimer" type="Timer" parent="." index="7"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="PointerTimer" to="." method="_on_PointerTimer_timeout"]
 
 
