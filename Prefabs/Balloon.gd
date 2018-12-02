@@ -60,12 +60,14 @@ func inflate(siding_left):
 		$inflating_sound.play()
 
 func _on_animation_finished(var animationName):
-	if not inflated:
+	if not inflated and animationName == "inflate":
 		inflated = true
 		set_gravity_scale(GRAV_SCALE)
 		set_mode(RigidBody2D.MODE_RIGID)
 		apply_impulse(Vector2(0, 0), Vector2(0, 0))
 		emit_signal("finish_inflating")
+	elif animationName == "deflate":
+		pass # todo deflated ballon particle
 
 func pierce(direction):
 	if inflated:
@@ -75,6 +77,7 @@ func pierce(direction):
 		add_force(Vector2(0,0), direction * mass * propulsion_force)
 		deflating = true
 		$deflating_sound.play()
+		$Animation.play("deflate")
 		$DeflatingTimer.start()
 
 func detach(direction):
@@ -83,6 +86,7 @@ func detach(direction):
 		$DampedSpringJoint2D.set_node_a("")
 		$DampedSpringJoint2D.queue_free()
 		pierce(direction)
+		
 
 func explode():
 	$Animation.play("paf")
