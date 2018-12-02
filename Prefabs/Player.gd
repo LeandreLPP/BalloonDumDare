@@ -68,7 +68,11 @@ func _integrate_forces(var s):
 	if jump:
 		jump = true
 	
-	if selectedBalloon:
+	if inflatingBalloon:
+		var target_pos = $arm/hand.get_global_position()
+		inflatingBalloon.setTargetPosition(target_pos, mouseVector.angle())
+	
+	if selectedBalloon and not inflatingBalloon:
 #		var space_state = get_world_2d().direct_space_state
 #		var target_pos = get_global_position() + (mouseVector * BALLOON_DIST)
 #		var ignore = [self]
@@ -194,6 +198,9 @@ func inflateBalloon():
 	if not BALLOONS_COUNT:
 		return
 
+	if balloons.size() > 0:
+		balloons[0].stopFollowingTarget()
+
 	BALLOONS_COUNT -= 1
 	
 	inflatingBalloon = balloonPacked.instance()
@@ -244,6 +251,7 @@ func closestBalloon(var vec):
 
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
+	balloon.stopFollowingTarget()
 	balloon.setHand($arm/hand)
 	balloon.apply_impulse(Vector2(0, 0), Vector2(-1, -1))
 	balloons.append(balloon)
