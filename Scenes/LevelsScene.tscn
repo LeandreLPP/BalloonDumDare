@@ -22,7 +22,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="LevelsScene" type="Node"]
+[node name="LevelsScene" type="Node" index="0"]
 
 [node name="TextureRect" type="TextureRect" parent="." index="0"]
 
@@ -109,19 +109,20 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 91.0
-margin_right = 784.0
-margin_bottom = 363.0
+margin_left = 392.0
+margin_top = 227.0
+margin_right = 392.0
+margin_bottom = 227.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 6
+size_flags_vertical = 6
 custom_constants/vseparation = 30
-custom_constants/hseparation = 0
-columns = 1
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+custom_constants/hseparation = 30
+columns = 4
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "custom_constants" ]
 
 [node name="MenuButton" type="Button" parent="LevelsMenu/VBoxContainer" index="2"]
 
