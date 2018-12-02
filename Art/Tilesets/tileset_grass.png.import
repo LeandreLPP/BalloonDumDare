@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset_grass.png-c90448ae2feddbc865be1f4222321faa.stex"
+path="res://.import/tileset_grass.png-8b2e329b1dc0300aef55fa1b92a48741.stex"
 
 [deps]
 
-source_file="res://Art/Sprites/tileset_grass.png"
-dest_files=[ "res://.import/tileset_grass.png-c90448ae2feddbc865be1f4222321faa.stex" ]
+source_file="res://Art/Tilesets/tileset_grass.png"
+dest_files=[ "res://.import/tileset_grass.png-8b2e329b1dc0300aef55fa1b92a48741.stex" ]
 
 [params]
 
