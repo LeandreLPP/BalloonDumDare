@@ -65,8 +65,8 @@ rotation = -2.1557
 
 [node name="Spike2" parent="." index="6" instance=ExtResource( 7 )]
 
-position = Vector2( 494.408, 292.424 )
-rotation = -2.93103
+position = Vector2( 510.989, 503.452 )
+rotation = 0.0385096
 
 [connection signal="pressed" from="BalloonSwitch" to="." method="_on_BalloonSwitch_pressed"]
 

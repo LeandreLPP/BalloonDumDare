@@ -7,3 +7,6 @@ func _on_Spike_body_entered(body):
 	if name == "Balloon" or name.begins_with("@Balloon@"):
 		var balloon = get_node(p)
 		balloon.explode()
+	if name == "Player" or name.begins_with("Player"):
+		var player = get_node(p)
+		player.die()

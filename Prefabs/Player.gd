@@ -16,6 +16,7 @@ export (int) var JUMP_VELOCITY = 460
 export (int) var STOP_JUMP_FORCE = 900.0
 export (int) var BALLOON_DIST = 40
 export (int) var BALLOONS_COUNT = 4
+export (int) var TERMINAL_SPEED = 800.0
 
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
 
@@ -121,6 +122,7 @@ func _integrate_forces(var s):
 			lv.y += STOP_JUMP_FORCE * step
 	
 	if on_floor:
+		$sound_fall.stop()
 		# Process logic when character is on floor
 		if move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
@@ -156,8 +158,8 @@ func _integrate_forces(var s):
 
 		if falling:
 			print("Falling speed = " + str(last_falling_speed))
-			if last_falling_speed > 800:
-				LevelManager.reload_level()
+			if last_falling_speed > TERMINAL_SPEED:
+				die()
 
 		falling = false
 	else:
@@ -181,6 +183,10 @@ func _integrate_forces(var s):
 			new_anim = "falling"
 			last_falling_speed = lv.y
 			falling = true
+			if last_falling_speed > TERMINAL_SPEED - 100 and not $sound_fall.playing:
+				$sound_fall.play()
+			elif last_falling_speed <= TERMINAL_SPEED - 100:
+				$sound_fall.stop()
 	
 	# Update siding
 	if new_siding_left != siding_left:
@@ -201,7 +207,18 @@ func _integrate_forces(var s):
 	# Finally, apply gravity and set back the linear velocity
 	lv += s.get_total_gravity() * step
 	s.set_linear_velocity(lv)
-	
+
+func die():
+	last_falling_speed = 0
+	mode = RigidBody2D.MODE_STATIC
+	$sound_jump.stop()
+	$sound_fall.stop()
+	$sound_death.play()
+	$wees/sound_wee1.stop()
+	$wees/sound_wee2.stop()
+	$wees/sound_wee3.stop()
+	$TimerDeath.start()
+
 func inflateBalloon():
 	if inflatingBalloon:
 		return
@@ -251,14 +268,6 @@ func closestBalloon(var vec):
 	if balloons.size() == 0:
 		return null
 	return balloons[0]
-#	var minV = 9999999
-#	var minB = null
-#	for i in range(balloons.size()):
-#		var bVec = balloons[i].get_position() - get_position()
-#		if abs(bVec.angle() - vec.angle()) < minV:
-#			minV = abs(bVec.angle() - vec.angle())
-#			minB = balloons[i]
-#	return minB
 
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
@@ -280,3 +289,6 @@ func _on_PointerTimer_timeout():
 	if selectedBalloon:
 		selectedBalloon.stopFollowingTarget()
 	selectedBalloon = null
+
+func _on_TimerDeath_timeout():
+	LevelManager.reload_level()
