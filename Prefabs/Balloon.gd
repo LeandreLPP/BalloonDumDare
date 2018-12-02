@@ -69,7 +69,12 @@ func detach(direction):
 		$DampedSpringJoint2D.set_node_a("")
 		$DampedSpringJoint2D.queue_free()
 		pierce(direction)
-	
+
+func explode():
+	$Animation.play("paf")
+	$explode_sound.play()
+	queue_free()
+	emit_signal("finish_deflating")
 
 func _on_DeflatingTimer_timeout():
 	emit_signal("finish_deflating")

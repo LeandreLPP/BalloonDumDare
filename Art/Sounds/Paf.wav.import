@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Paf.wav-4967127de6b65e8471f8cb2bcb8ee9ef.sample"
+
+[deps]
+
+source_file="res://Art/Sounds/Paf.wav"
+dest_files=[ "res://.import/Paf.wav-4967127de6b65e8471f8cb2bcb8ee9ef.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
