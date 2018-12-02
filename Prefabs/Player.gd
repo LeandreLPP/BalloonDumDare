@@ -69,16 +69,17 @@ func _integrate_forces(var s):
 		jump = true
 	
 	if selectedBalloon:
-		var space_state = get_world_2d().direct_space_state
-		var target_pos = get_global_position() + (mouseVector * BALLOON_DIST)
-		var ignore = [self]
-		for bal in balloons:
-			ignore.append(bal)
-		if inflatingBalloon:
-			ignore.append(inflatingBalloon)
-		var result = space_state.intersect_ray(get_global_position(), target_pos, ignore)
-		if result:
-			target_pos = result.position
+#		var space_state = get_world_2d().direct_space_state
+#		var target_pos = get_global_position() + (mouseVector * BALLOON_DIST)
+#		var ignore = [self]
+#		for bal in balloons:
+#			ignore.append(bal)
+#		if inflatingBalloon:
+#			ignore.append(inflatingBalloon)
+#		var result = space_state.intersect_ray(get_global_position(), target_pos, ignore)
+#		if result:
+#			target_pos = result.position
+		var target_pos = $arm/hand.get_global_position()
 		selectedBalloon.setTargetPosition(target_pos, mouseVector.angle())
 	
 	# Deapply prev floor velocity
@@ -244,6 +245,7 @@ func closestBalloon(var vec):
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
 	balloon.setHand($arm/hand)
+	balloon.apply_impulse(Vector2(0, 0), Vector2(-1, -1))
 	balloons.append(balloon)
 
 func _on_Balloon_deflated(var balloon):

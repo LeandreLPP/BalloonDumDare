@@ -81,7 +81,7 @@ angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear" ]
 propulsion_force = 600
-GRAV_SCALE = -1
+GRAV_SCALE = -10
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -165,8 +165,8 @@ node_a = NodePath("")
 node_b = NodePath("..")
 bias = 0.9
 disable_collision = true
-length = 5.0
-rest_length = 5.0
+length = 10.0
+rest_length = 10.0
 stiffness = 25.0
 damping = 10.0
 

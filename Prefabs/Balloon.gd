@@ -3,7 +3,7 @@ extends RigidBody2D
 var inflated = false
 var deflating = false
 export (int) var propulsion_force = 500
-export (float) var GRAV_SCALE = -1
+export (float) var GRAV_SCALE = -10
 
 signal finish_inflating
 signal finish_deflating
