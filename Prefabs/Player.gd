@@ -22,6 +22,8 @@ var MAX_FLOOR_AIRBORNE_TIME = 0.15
 var airborne_time = 1e20
 
 var floor_h_velocity = 0.0
+var falling = false
+var last_falling_speed = 0.0
 
 onready var balloonPacked = preload("res://Prefabs/Balloon.tscn")
 var inflatingBalloon = null
@@ -151,6 +153,13 @@ func _integrate_forces(var s):
 			new_anim = "idle"
 		else:
 			new_anim = "run"
+
+		if falling:
+			print("Falling speed = " + str(last_falling_speed))
+			if last_falling_speed > 800:
+				LevelManager.reload_level()
+
+		falling = false
 	else:
 		# Process logic when the character is in the air
 		if move_left and not move_right:
@@ -170,6 +179,8 @@ func _integrate_forces(var s):
 			new_anim = "jumping"
 		else:
 			new_anim = "falling"
+			last_falling_speed = lv.y
+			falling = true
 	
 	# Update siding
 	if new_siding_left != siding_left:
