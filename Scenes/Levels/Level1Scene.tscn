@@ -1,14 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Plateforme.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Porte.gd" type="Script" id=3]
-[ext_resource path="res://Art/Sprites/Door.png" type="Texture" id=4]
-
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 31.0991, 33.0468 )
+[ext_resource path="res://Prefabs/Porte.tscn" type="PackedScene" id=3]
 
 [node name="Level1Scene" type="Node"]
 
@@ -20,28 +14,8 @@ position = Vector2( 442.298, 327.559 )
 
 position = Vector2( 426.456, 397.333 )
 
-[node name="Porte" type="Area2D" parent="." index="2"]
+[node name="Porte" parent="." index="2" instance=ExtResource( 3 )]
 
-position = Vector2( 662.521, 336.813 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 3 )
-_sections_unfolded = [ "Collision" ]
-PLAYER = NodePath("../Player")
-
-[node name="Sprite" type="Sprite" parent="Porte" index="0"]
-
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Porte" index="1"]
-
-shape = SubResource( 1 )
-
-[connection signal="body_entered" from="Porte" to="Porte" method="_on_Porte_body_entered"]
+position = Vector2( 660.249, 337.763 )
 
 
