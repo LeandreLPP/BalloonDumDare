@@ -7,23 +7,30 @@ var current_level = 1
 export (int) var MIN_LEVEL = 1
 export (int) var MAX_LEVEL = 1
 
+onready var music = get_node("/root/MusicPlayer")
+
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 func goto_main_menu():
+	music.inGame = false
 	goto_scene("res://Scenes/MainMenuScene.tscn")
 
 func goto_credit_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/CreditsScene.tscn")
 	
 func goto_levels_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/LevelsScene.tscn")
 	
 func goto_options_scene():
+	music.inGame = false
 	goto_scene("res://Scenes/OptionsScene.tscn")
 
 func goto_level(level):
+	music.inGame = true
 	if level < 0:
 		goto_level(0)
 	elif level <= MAX_LEVEL:
