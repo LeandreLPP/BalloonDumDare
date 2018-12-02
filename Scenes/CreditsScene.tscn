@@ -33,7 +33,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 4.88109, 621.394, 0, 0, 0, 0, 39.55, 669.629, 0, 0, 0, 0, 943.955, 666.614, 0, 0, 0, 0, 995.205, 622.901, 0, 0, 0, 0, 4.88109, 621.394 )
+"points": PoolVector2Array( 0, 0, 0, 0, 5.03613, 861.917, 0, 0, 0, 0, 296.143, 923.563, 0, 0, 0, 0, 1484.55, 926.988, 0, 0, 0, 0, 1844.15, 920.138, 0, 0, 0, 0, 5.19104, 855.067 )
 }
 
 [node name="CreditsScene" type="Node" index="0"]
@@ -59,7 +59,6 @@ stretch_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="." index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -68,12 +67,13 @@ rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/margin_right = 120
 custom_constants/margin_top = 80
 custom_constants/margin_left = 120
 custom_constants/margin_bottom = 80
+_sections_unfolded = [ "Size Flags" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
 
@@ -81,19 +81,19 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 120.0
+margin_left = 130.0
 margin_top = 115.0
-margin_right = 883.0
+margin_right = 893.0
 margin_bottom = 485.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 2
+size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 50
 alignment = 0
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags", "custom_constants" ]
 
 [node name="Thanks" type="Label" parent="MarginContainer/VBoxContainer" index="0"]
 
@@ -108,7 +108,7 @@ rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 6
 custom_fonts/font = SubResource( 1 )
 text = "THANK YOU FOR PLAYING!"
 align = 1
@@ -132,9 +132,9 @@ rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
-text = "Created during the Ludum Dare 43"
+text = "Created during the Ludum Dare 43."
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -155,9 +155,9 @@ rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
-text = "Idea, Art and Development by"
+text = "Idea, Art and Development by:"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -178,7 +178,7 @@ rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "Evanaellio, Teanan and Youkool"
 align = 1
@@ -214,25 +214,19 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="TimerPopBalloon" type="Timer" parent="." index="2"]
-
-process_mode = 1
-wait_time = 0.33
-one_shot = false
-autostart = true
-
-[node name="PathPop" type="Path2D" parent="." index="3"]
+[node name="PathPop" type="Path2D" parent="MarginContainer/VBoxContainer" index="5"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+position = Vector2( -131, -148 )
 curve = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BalloonSpawnLocation" type="PathFollow2D" parent="PathPop" index="0"]
+[node name="BalloonSpawnLocation" type="PathFollow2D" parent="MarginContainer/VBoxContainer/PathPop" index="0"]
 
-position = Vector2( 80.2482, 491.762 )
-rotation = 0.86459
+position = Vector2( 4.88109, 621.394 )
+rotation = 0.947592
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -240,6 +234,13 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
+
+[node name="TimerPopBalloon" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.33
+one_shot = false
+autostart = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
 
