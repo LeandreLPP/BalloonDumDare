@@ -205,8 +205,9 @@ func launchBalloon():
 	var b = selectedBalloon
 	if not b:
 		b = closestBalloon(vec)
-	if not b:
+	if not b or b.deflating:
 		return
+	playRandomWee()
 	b.pierce(vec)
 
 func detachBalloon():
@@ -214,7 +215,7 @@ func detachBalloon():
 	var b = selectedBalloon
 	if not b:
 		b = closestBalloon(vec)
-	if not b:
+	if not b or b.deflating:
 		return
 	b.detach(vec)
 	balloons.erase(b)
@@ -242,4 +243,7 @@ func _on_Balloon_deflated(var balloon):
 	if selectedBalloon == balloon:
 		selectedBalloon = null
 	balloon.free()
-	
+
+func playRandomWee():
+	var i = floor(rand_range(0, $wees.get_child_count()))
+	$wees.get_child(i).play()

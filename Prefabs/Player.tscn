@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Prefabs/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/medium_kid.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sounds/Weee1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Art/Sounds/Weee2.wav" type="AudioStream" id=4]
+[ext_resource path="res://Art/Sounds/Weee3.wav" type="AudioStream" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -37,7 +40,7 @@ length = 1.0
 loop = false
 step = 0.1
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -148,6 +151,7 @@ __meta__ = {
 
 [node name="arm" type="Position2D" parent="." index="5"]
 
+editor/display_folded = true
 position = Vector2( -4.66716, -3.25737 )
 _sections_unfolded = [ "Transform" ]
 
@@ -162,5 +166,42 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 0, -8 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="wees" type="Position2D" parent="." index="6"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="sound_wee1" type="AudioStreamPlayer2D" parent="wees" index="0"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="sound_wee2" type="AudioStreamPlayer2D" parent="wees" index="1"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="sound_wee3" type="AudioStreamPlayer2D" parent="wees" index="2"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 
