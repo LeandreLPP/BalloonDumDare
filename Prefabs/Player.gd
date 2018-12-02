@@ -14,6 +14,7 @@ export (int) var AIR_ACCEL = 200.0
 export (int) var AIR_DEACCEL = 200.0
 export (int) var JUMP_VELOCITY = 460
 export (int) var STOP_JUMP_FORCE = 900.0
+export (int) var BALLOON_DIST = 40
 
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
 
@@ -26,8 +27,6 @@ var inflatingBalloon = null
 
 var balloons = []
 var selectedBalloon = null
-var selectedBalloonDist = 0
-var selectedBalloonGrav = 0
 var mouseVector = Vector2()
 
 onready var camera = get_node("Camera")
@@ -41,14 +40,12 @@ func _input(event):
 		detachBalloon()
 		
 	if event is InputEventMouseMotion:
-		if selectedBalloon:
-			selectedBalloon.set_gravity_scale(selectedBalloonGrav)
-		mouseVector = (get_global_mouse_position() - get_position()).normalized()
-		selectedBalloon = closestBalloon(mouseVector)
-		if selectedBalloon:
-			selectedBalloonGrav = selectedBalloon.get_gravity_scale()
-			selectedBalloon.set_gravity_scale(0)
-			selectedBalloonDist = (selectedBalloon.get_position() - get_position()).length()
+		mouseVector = get_local_mouse_position().normalized()
+		var newSelectedBalloon = closestBalloon(mouseVector)
+		if selectedBalloon != newSelectedBalloon:
+			if selectedBalloon:
+				selectedBalloon.stopFollowingTarget()
+			selectedBalloon = newSelectedBalloon
 
 func _integrate_forces(var s):
 	var lv = s.get_linear_velocity()
@@ -67,8 +64,9 @@ func _integrate_forces(var s):
 		jump = true
 	
 	if selectedBalloon:
-		var a = (selectedBalloon.get_position() - get_position()).normalized()
-		selectedBalloon.apply_impulse(Vector2(), mouseVector - a)
+		selectedBalloon.setTargetPosition(get_global_position() + (mouseVector * BALLOON_DIST), mouseVector.angle())
+		# var a = (selectedBalloon.get_position() - get_position()).normalized()
+		# selectedBalloon.apply_impulse(Vector2(), mouseVector - a)
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -190,23 +188,23 @@ func inflateBalloon():
 	spring.set_node_a(get_path())
 	
 	inflatingBalloon.inflate(siding_left)
-	
-func launchBalloon():
-	var vec = (get_global_mouse_position() - get_position()).normalized()
-	var b = closestBalloon(vec)
 
+func launchBalloon():
+	var vec = get_local_mouse_position().normalized()
+	var b = selectedBalloon
+	if not b:
+		b = closestBalloon(vec)
 	if not b:
 		return
-
 	b.pierce(vec)
 
 func detachBalloon():
-	var vec = (get_global_mouse_position() - get_position()).normalized()
-	var b = closestBalloon(vec)
-
+	var vec = get_local_mouse_position().normalized()
+	var b = selectedBalloon
+	if not b:
+		b = closestBalloon(vec)
 	if not b:
 		return
-
 	b.detach(vec)
 	balloons.erase(b)
 
@@ -222,6 +220,7 @@ func closestBalloon(var vec):
 
 func _on_Balloon_inflated(var balloon):
 	inflatingBalloon = null
+	balloon.setHand($hand)
 	balloons.append(balloon)
 
 func _on_Balloon_deflated(var balloon):

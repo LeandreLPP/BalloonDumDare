@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Prefabs/Balloon.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/balloon_animation.png" type="Texture" id=2]
 [ext_resource path="res://Art/Sounds/GonflageCut.wav" type="AudioStream" id=3]
 [ext_resource path="res://Art/Sounds/BallonDeflate.wav" type="AudioStream" id=4]
+[ext_resource path="res://Prefabs/Rope.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -49,6 +50,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 propulsion_force = 600
+GRAV_SCALE = -1
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -124,6 +126,15 @@ length = 30.0
 rest_length = 25.0
 stiffness = 25.0
 damping = 10.0
+
+[node name="Rope" type="Line2D" parent="." index="7"]
+
+points = PoolVector2Array( 0, 0 )
+width = 1.0
+default_color = Color( 0.800781, 0.800781, 0.800781, 1 )
+sharp_limit = 2.0
+round_precision = 8
+script = ExtResource( 5 )
 
 [connection signal="timeout" from="DeflatingTimer" to="." method="_on_DeflatingTimer_timeout"]
 
