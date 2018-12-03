@@ -1,5 +1,10 @@
 extends Node
 
+func _ready():
+	if OS.get_name() == "HTML5":
+		$MainMenu/VBoxContainer/QuitButton.disabled = true
+		$MainMenu/VBoxContainer/QuitButton.hide()
+
 func _on_PlayButton_pressed():
 	LevelManager.goto_level(LevelManager.current_level)
 
