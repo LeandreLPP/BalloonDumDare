@@ -78,10 +78,12 @@ func pierce(direction):
 		set_linear_velocity(Vector2(0, 0))
 		add_force(Vector2(0,0), direction * mass * propulsion_force)
 		deflating = true
-#		$air_particles.emitting = true
 		$deflating_sound.play()
 		$Animation.play("deflate")
 		$DeflatingTimer.start()
+		
+		if OS.get_name() != "HTML5": # disable particles in browser (thanks Chrome) 
+			$air_particles.emitting = true
 
 func detach(direction):
 	if inflated:
