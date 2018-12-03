@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/MainMenuScene.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/BasicSky.png" type="Texture" id=2]
@@ -25,15 +25,7 @@ use_filter = false
 font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=3]
-
-size = 25
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=3]
 
 custom_solver_bias = 0.0
 radius = 4.76274
@@ -46,38 +38,34 @@ height = 12.3993
 
 [sub_resource type="Animation" id=5]
 
-resource_name = "falling"
 length = 1.0
 loop = false
 step = 0.1
 
 [sub_resource type="Animation" id=6]
 
-resource_name = "idle"
 length = 1.0
 loop = false
 step = 0.1
 
 [sub_resource type="Animation" id=7]
 
-resource_name = "jumping"
 length = 1.0
 loop = false
 step = 0.1
 
 [sub_resource type="Animation" id=8]
 
-resource_name = "run"
 length = 1.0
 loop = false
 step = 0.1
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=9]
 
 custom_solver_bias = 0.0
 radius = 1.13318
 
-[sub_resource type="CapsuleShape2D" id=9]
+[sub_resource type="CapsuleShape2D" id=10]
 
 custom_solver_bias = 0.0
 radius = 2.02075
@@ -106,7 +94,6 @@ _sections_unfolded = [ "Anchor", "Grow Direction", "Pause", "Size Flags" ]
 
 [node name="MainMenu" type="MarginContainer" parent="." index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -125,7 +112,6 @@ _sections_unfolded = [ "custom_constants" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -174,7 +160,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 55.0
 margin_right = 784.0
-margin_bottom = 404.0
+margin_bottom = 440.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -190,9 +176,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 55.0
+margin_top = 73.0
 margin_right = 390.0
-margin_bottom = 293.0
+margin_bottom = 311.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -315,40 +301,13 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 394.0
 margin_right = 784.0
-margin_bottom = 349.0
+margin_bottom = 385.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-_sections_unfolded = [ "Size Flags" ]
-
-[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 353.0
-margin_top = 408.0
-margin_right = 431.0
-margin_bottom = 440.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 4
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Quit"
-flat = false
-align = 1
 _sections_unfolded = [ "Size Flags" ]
 
 [node name="PinJoint2D" type="PinJoint2D" parent="." index="2"]
@@ -373,7 +332,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-shape = SubResource( 11 )
+shape = SubResource( 3 )
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="StaticBody2D" index="1"]
 
@@ -437,7 +396,6 @@ blend_times = [  ]
 [node name="arm" type="RigidBody2D" parent="." index="5"]
 
 position = Vector2( 746.78, 360.686 )
-scale = Vector2( 1, 1 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -474,13 +432,13 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="arm/hand" index="0"]
 
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="arm" index="2"]
 
 position = Vector2( 0.0615234, -4.37421 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 disabled = true
 _sections_unfolded = [ "Transform" ]
 
@@ -687,7 +645,5 @@ surchage_hand = NodePath("../../arm/hand")
 [connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-
-[connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 
 
