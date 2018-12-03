@@ -7,15 +7,19 @@
 [ext_resource path="res://Prefabs/DeathLine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/GUIs/LevelGUI.tscn" type="PackedScene" id=6]
 
-[node name="Level1Scene" type="Node" index="0"]
+[node name="Level1Scene" type="Node"]
 
 [node name="Tuto" type="Position2D" parent="." index="0"]
 
-position = Vector2( 69.0985, -82.3302 )
+position = Vector2( 109.217, -80.3441 )
 
 [node name="Sprite" type="Sprite" parent="Tuto" index="0"]
 
+position = Vector2( 0, -0.527039 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 40, 42 )
+_sections_unfolded = [ "Region" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 2 )]
 
